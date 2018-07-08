@@ -30,7 +30,7 @@ class App extends React.Component<Props, State> {
 
   getQuotes = () => {
     axios.get('api/quotes').then((res) => {
-      this.setState(() => ({ quotes: res.data }));
+      this.setState(() => ({ quotes: res.data.reverse() }));
     });
   };
 
