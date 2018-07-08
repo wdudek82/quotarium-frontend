@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   transition: all 1s;
 
   :hover {
-    font-size: 2rem;
+    /* font-size: 2rem; */
   }
 `;
 

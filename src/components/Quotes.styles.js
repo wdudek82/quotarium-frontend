@@ -17,7 +17,7 @@ export const Quote = styled.div`
 
   :hover {
     box-shadow: 0 0 20px 0 #555;
-    transform: rotate(3deg);
+    transform: scale(1.1);
   }
 `;
 

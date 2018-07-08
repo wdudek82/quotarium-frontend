@@ -2,9 +2,11 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.main`
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(300px, 700px);
   grid-template-rows: 15rem 4.5rem auto auto;
-  margin: 0 20%;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5rem;
   min-height: 100vh;
 `;
 

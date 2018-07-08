@@ -21,7 +21,7 @@ export default css`
   }
 
   html, body {
-    margin: 0
+    margin: 0;
     /* height: 100%; */
     overflow: visible;
   }
