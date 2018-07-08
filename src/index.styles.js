@@ -5,27 +5,29 @@ export default css`
   @import url('https://fonts.googleapis.com/css?family=Fira+Sans:400,700,900');
 
   * {
-    color: var(--graphite-dark);
+    color: #555;
     font-family: "Lato", sans-serif;
     box-sizing: border-box;
 
     ::selection {
-      background: var(--mango);
+      background: #efa315;
+      color: #fff;
     }
   }
 
   html {
     font-size: 62.5%;
+    background: linear-gradient(#eee, #fff);
   }
 
   html, body {
-    height: 100%;
+    margin: 0
+    /* height: 100%; */
     overflow: visible;
   }
 
   body {
     font-size: 1.6rem;
-    background: #eee;
   }
 
   h1, h2, h3, h4, h5, h6 {

@@ -1,7 +1,8 @@
 // @flow
 import * as React from 'react';
 import QuoteItem from './QuoteItem';
-import { Wrapper, Quote, EditButton, DeleteButton } from './Quotes.styles';
+import Spinner from './Spinner/Spinner';
+import { Wrapper, Quote, ButtonsWrapper, EditButton, DeleteButton } from './Quotes.styles';
 
 type Props = {
   quotes: Array<Object>,
@@ -12,20 +13,20 @@ type Props = {
 
 const Quotes = (props: Props) => {
   const renderQuoteList = () => {
-    let quoteList = 'Loding...';
+    let quoteList = <Spinner />;
 
     if (props.quotes) {
       quoteList = props.quotes.map(({ id, text }) => (
         <Quote key={`quote-${id}`}>
           {!props.editMode && (
-            <React.Fragment>
+            <ButtonsWrapper>
               <EditButton type="button" onClick={() => props.startEditing(id)}>
                 Edit
               </EditButton>
               <DeleteButton type="button" onClick={() => props.delete(id)}>
                 Delete
               </DeleteButton>
-            </React.Fragment>
+            </ButtonsWrapper>
           )}
           <QuoteItem text={text} />
         </Quote>

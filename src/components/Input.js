@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Form, InputField, Button } from './Input.styles';
+import { Form, InputField, ButtonWrapper, Button } from './Input.styles';
 
 type Props = {
   editMode: boolean,
@@ -25,7 +25,7 @@ const Input = (props: Props) => {
         onChange={props.changed}
       />
       <label htmlFor="author" />
-      <div>
+      <ButtonWrapper>
         {!props.editMode ? (
           <Button type="submit">Submit</Button>
         ) : (
@@ -36,7 +36,7 @@ const Input = (props: Props) => {
             </Button>
           </React.Fragment>
         )}
-      </div>
+      </ButtonWrapper>
     </Form>
   );
 }
