@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import QuoteItem from './QuoteItem';
+import { Wrapper, Quote, EditButton, DeleteButton } from './Quotes.styles';
 
 type Props = {
   quotes: Array<Object>,
@@ -15,26 +16,26 @@ const Quotes = (props: Props) => {
 
     if (props.quotes) {
       quoteList = props.quotes.map(({ id, text }) => (
-        <div key={`quote-${id}`}>
+        <Quote key={`quote-${id}`}>
           {!props.editMode && (
             <React.Fragment>
-              <button type="button" onClick={() => props.startEditing(id)}>
+              <EditButton type="button" onClick={() => props.startEditing(id)}>
                 Edit
-              </button>
-              <button type="button" onClick={() => props.delete(id)}>
-                x
-              </button>
+              </EditButton>
+              <DeleteButton type="button" onClick={() => props.delete(id)}>
+                Delete
+              </DeleteButton>
             </React.Fragment>
           )}
           <QuoteItem text={text} />
-        </div>
+        </Quote>
       ));
     }
 
     return quoteList;
   };
 
-  return <div>{renderQuoteList()}</div>;
+  return <Wrapper>{renderQuoteList()}</Wrapper>;
 };
 
 export default Quotes;

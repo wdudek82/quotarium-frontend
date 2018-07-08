@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import { Form, InputField, Button } from './Input.styles';
 
 type Props = {
   editMode: boolean,
@@ -13,12 +14,10 @@ const Input = (props: Props) => {
   const id = props.editedQuote ? props.editedQuote.id : '';
   const quote = props.editedQuote ? props.editedQuote.text : '';
 
-  console.log(props.editedQuote);
-
   return (
-    <form onSubmit={props.submit}>
+    <Form onSubmit={props.submit}>
       <label htmlFor="quote" />
-      <input
+      <InputField
         id={id}
         type="text"
         name="quote"
@@ -28,17 +27,17 @@ const Input = (props: Props) => {
       <label htmlFor="author" />
       <div>
         {!props.editMode ? (
-          <button type="submit">Submit</button>
+          <Button type="submit">Submit</Button>
         ) : (
           <React.Fragment>
-            <button type="submit">Update</button>
-            <button type="submit" onClick={props.stopEditind}>
+            <Button type="submit">Update</Button>
+            <Button type="submit" onClick={props.stopEditind}>
               Cancel
-            </button>
+            </Button>
           </React.Fragment>
         )}
       </div>
-    </form>
+    </Form>
   );
 }
 

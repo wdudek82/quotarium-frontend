@@ -3,6 +3,7 @@ import React from 'react';
 import axios from 'axios';
 import Input from './Input';
 import Quotes from './Quotes';
+import { Wrapper, Header, H1, H3, Footer } from './App.styles';
 
 type Props = {};
 
@@ -107,7 +108,11 @@ class App extends React.Component<Props, State> {
 
   render() {
     return (
-      <div>
+      <Wrapper>
+        <Header>
+          <H1>Quotarium</H1>
+          <H3>The Repository of Most Briliant Quotes!</H3>
+        </Header>
         <Input
           editMode={this.state.editMode}
           editedQuote={this.state.editedQuote}
@@ -121,7 +126,10 @@ class App extends React.Component<Props, State> {
           startEditing={this.handleSetEditModeOn}
           delete={this.deleteQuote}
         />
-      </div>
+        <Footer>
+          Wojciech Dudek, 2018
+        </Footer>
+      </Wrapper>
     );
   }
 }

@@ -1,14 +1,15 @@
 // @flow
 import React from 'react';
+import Wrapper from './QuoteItem.styles';
 
 type Props = {
   text: string,
 };
 
 const QuoteItem = (props: Props) => (
-  <div>
+  <Wrapper>
     <div>{props.text}</div>
-  </div>
+  </Wrapper>
 );
 
 export default QuoteItem;
