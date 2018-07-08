@@ -21,14 +21,14 @@ class App extends React.Component<Props, State> {
   };
 
   componentDidMount() {
-    const quotes = this.getQuotes();
+    const quotes = this.fetchQuotes();
 
     this.setState(() => ({
       quotes,
     }));
   }
 
-  getQuotes = () => {
+  fetchQuotes = () => {
     axios.get('api/quotes').then((res) => {
       this.setState(() => ({ quotes: res.data.reverse() }));
     });
@@ -39,7 +39,7 @@ class App extends React.Component<Props, State> {
       .post('api/quotes/', { text })
       .then((res) => {
         console.log(`quote ${res.data.id} successfully created`);
-        this.getQuotes();
+        this.fetchQuotes();
       })
       .catch((err) => console.log(err));
   };
@@ -49,7 +49,7 @@ class App extends React.Component<Props, State> {
       .put(`api/quotes/${id}/`, { text })
       .then((res) => {
         console.log(`quote ${res.data.id} successfully updated`);
-        this.getQuotes();
+        this.fetchQuotes();
       })
       .catch((err) => console.log(err));
   };
@@ -58,7 +58,7 @@ class App extends React.Component<Props, State> {
     axios.delete(`api/quotes/${id}`)
       .then((res) => {
         console.log(`quote ${id} successfully deleted`);
-        this.getQuotes();
+        this.fetchQuotes();
       })
       .catch((err) => console.log(err));
   }
@@ -111,7 +111,7 @@ class App extends React.Component<Props, State> {
       <Wrapper>
         <Header>
           <H1>Quotarium</H1>
-          <H3>The Repository of Most Briliant Quotes!</H3>
+          <H3>The Repository of Most Brilliant Quotes!</H3>
         </Header>
         <Input
           editMode={this.state.editMode}
