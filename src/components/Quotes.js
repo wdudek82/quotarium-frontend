@@ -1,68 +1,40 @@
 // @flow
 import * as React from 'react';
-import axios from 'axios';
-import Input from './Input';
 import QuoteItem from './QuoteItem';
 
-type Props = {};
-
-type State = {
+type Props = {
   quotes: Array<Object>,
-  authors: Array<Object>,
+  editMode: boolean,
+  startEditing: (number) => void,
+  delete: (number) => void,
 };
 
-class Quotes extends React.Component<Props, State> {
-  state = {
-    authors: [],
-    quotes: [],
-  };
-
-  componentDidMount() {
-    const authors = this.getAuthors();
-    const quotes = this.getQuotes();
-
-    this.setState(() => ({
-      authors,
-      quotes,
-    }));
-  }
-
-  getAuthors = () => {
-    axios.get('api/authors/').then((res) => {
-      this.setState(() => ({ authors: res.data }));
-    });
-  };
-
-  getQuotes = () => {
-    axios.get('api/quotes').then((res) => {
-      this.setState(() => ({ quotes: res.data }));
-    });
-  };
-
-  renderQuoteList() {
+const Quotes = (props: Props) => {
+  const renderQuoteList = () => {
     let quoteList = 'Loding...';
 
-    console.log(this.state);
-
-    if (this.state.quotes) {
-      quoteList = this.state.quotes.map(({ id, author, text }) => (
-        <QuoteItem key={`quote-${id}`} author={author} text={text} />
+    if (props.quotes) {
+      quoteList = props.quotes.map(({ id, text }) => (
+        <div key={`quote-${id}`}>
+          {!props.editMode && (
+            <React.Fragment>
+              <button type="button" onClick={() => props.startEditing(id)}>
+                Edit
+              </button>
+              <button type="button" onClick={() => props.delete(id)}>
+                x
+              </button>
+            </React.Fragment>
+          )}
+          <QuoteItem text={text} />
+        </div>
       ));
     }
 
     return quoteList;
-  }
+  };
 
-  render() {
-    console.log(this.state);
-    return (
-      <div>
-        Quotes Component
-        <Input authors={this.state.authors} />
-        {this.renderQuoteList()}
-      </div>
-    );
-  }
-}
+  return <div>{renderQuoteList()}</div>;
+};
 
 export default Quotes;

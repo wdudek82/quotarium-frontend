@@ -2,43 +2,44 @@
 import * as React from 'react';
 
 type Props = {
-  authors: ?Array<Object>,
+  editMode: boolean,
+  editedQuote: Object | null,
+  changed: (?SyntheticEvent<HTMLInputElement>) => void,
+  stopEditind: (number) => void,
+  submit: (void) => void,
 };
 
 const Input = (props: Props) => {
-  const renderAuthosOptions = () => {
-    let authorOptions = '---';
+  const id = props.editedQuote ? props.editedQuote.id : '';
+  const quote = props.editedQuote ? props.editedQuote.text : '';
 
-    if (props.authors) {
-      authorOptions = props.authors.map(({ first_name: fName, last_name: lName }) => {
-        const key = `${fName.toLowerCase()}-${lName && lName.toLowerCase()}`;
-        return (
-          <option
-            key={key}
-            value={key}
-          >
-            {`${fName} ${lName || ''}`}
-          </option>
-        );
-      });
-    }
-
-    return authorOptions;
-  };
+  console.log(props.editedQuote);
 
   return (
-    <form>
-      <label htmlFor="quote">
-        <input type="text" name="quote" value="" />
-      </label>
-      <label htmlFor="author">
-        <select name="authors" id="">
-          { renderAuthosOptions() }
-        </select>
-      </label>
-      <button type="submit">Submit</button>
+    <form onSubmit={props.submit}>
+      <label htmlFor="quote" />
+      <input
+        id={id}
+        type="text"
+        name="quote"
+        value={quote}
+        onChange={props.changed}
+      />
+      <label htmlFor="author" />
+      <div>
+        {!props.editMode ? (
+          <button type="submit">Submit</button>
+        ) : (
+          <React.Fragment>
+            <button type="submit">Update</button>
+            <button type="submit" onClick={props.stopEditind}>
+              Cancel
+            </button>
+          </React.Fragment>
+        )}
+      </div>
     </form>
   );
-};
+}
 
 export default Input;
